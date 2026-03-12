@@ -15,7 +15,13 @@ let package = Package(
   ],
   dependencies: [],
   targets: [
-    .target(name: "NetworkImage"),
+    .target(
+      name: "NetworkImage",
+      swiftSettings: [
+        // CI build performance: avoid whole-module optimization hangs.
+        .unsafeFlags(["-no-whole-module-optimization"])
+      ]
+    ),
     .testTarget(
       name: "NetworkImageTests",
       dependencies: ["NetworkImage"]
