@@ -18,8 +18,8 @@ let package = Package(
     .target(
       name: "NetworkImage",
       swiftSettings: [
-        // CI build performance: avoid whole-module optimization hangs.
-        .unsafeFlags(["-no-whole-module-optimization"])
+        // CI build performance: avoid long LLVM optimization passes.
+        .unsafeFlags(["-Xfrontend", "-disable-llvm-optzns"])
       ]
     ),
     .testTarget(
